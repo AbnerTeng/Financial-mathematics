@@ -1,0 +1,133 @@
+\documentclass[12pt]{article}
+\usepackage{tikz}
+\usetikzlibrary{trees}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,scrextend}
+\usepackage{fancyhdr}
+\setlength{\headheight}{14.5pt}
+\addtolength{\topmargin}{-2.5pt}
+\pagestyle{fancy}
+
+\newcommand{\cont}{\subseteq}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{amsmath}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax% just so we can load this and rsfs
+\usepackage[scr]{rsfso}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage[colorlinks=true, pdfstartview=FitV, linkcolor=blue,
+citecolor=blue, urlcolor=blue]{hyperref}
+
+\DeclareMathOperator{\arcsec}{arcsec}
+\DeclareMathOperator{\arccot}{arccot}
+\DeclareMathOperator{\arccsc}{arccsc}
+\newcommand{\ddx}{\frac{d}{dx}}
+\newcommand{\dfdx}{\frac{df}{dx}}
+\newcommand{\ddxp}[1]{\frac{d}{dx}\left( #1 \right)}
+\newcommand{\dydx}{\frac{dy}{dx}}
+\let\ds\displaystyle
+\newcommand{\intx}[1]{\int #1 \, dx}
+\newcommand{\intt}[1]{\int #1 \, dt}
+\newcommand{\defint}[3]{\int_{#1}^{#2} #3 \, dx}
+\newcommand{\imp}{\Rightarrow}
+\newcommand{\un}{\cup}
+\newcommand{\inter}{\cap}
+\newcommand{\ps}{\mathscr{P}}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newtheorem*{sol}{Solution}
+\newtheorem*{claim}{Claim}
+\newtheorem{problem}{Problem}
+\pgfplotsset{compat=1.17}
+\begin{document}
+ 
+% Don't change the above session
+
+\lhead{Financial Mathematics hw1}
+\chead{111352027}
+\rhead{\today}
+ 
+% \maketitle
+\section{$\sigma$-field}
+\tikzstyle{level 1}=[level distance=3.5cm, sibling distance=3.5cm]
+\tikzstyle{level 2}=[level distance=3.5cm, sibling distance=2cm]
+
+% Define styles for bags and leafs
+\tikzstyle{bag} = [text width=4em, text centered]
+\tikzstyle{end} = [circle, minimum width=3pt,fill, inner sep=0pt]
+
+% The sloped option gives rotated edge labels. Personally
+% I find sloped labels a bit difficult to read. Remove the sloped options
+% to get horizontal labels. 
+\begin{tikzpicture}[grow=right, sloped]
+\node[bag] {$\Omega$}
+    child {
+        node[bag] {$\{\omega_4, \omega_5, \omega_6\}$}        
+            child {
+                node[bag] {$\{\omega_5, \omega_6\}$}
+                    child{
+                        node[end, label=right:
+                            {$\{\omega_6\}$}] {}
+                        edge from parent
+                    }
+                    child {
+                        node[end, label=right:
+                            {$\{\omega_5\}$}] {}
+                        edge from parent
+                    }
+            }
+            child {
+                node[end, label=right:
+                    {$\{\omega_4\}$}] {}
+                edge from parent
+            }
+            edge from parent 
+    }
+    child {
+        node[bag] {$\{\omega_1, \omega_2, \omega_3\}$}        
+        child {
+                node[bag] {$\{\omega_2, \omega_3\}$}
+                child{
+                    node[end, label=right:
+                        {$\{\omega_2\}$}] {}
+                    edge from parent
+                }
+                child {
+                    node[end, label=right:
+                        {$\{\omega_3\}$}] {}
+                    edge from parent
+                }
+            }
+            child {
+                node[end, label=right:
+                    {$\{\omega_1\}$}] {}
+                edge from parent
+            }
+        edge from parent         
+    };
+\end{tikzpicture}
+\newline
+\begin{align*}
+    \mathcal{F}_0, \mathcal{F}_1 &= \sigma(X_0, X_1) = \{\{\omega_1, \omega_2, \omega_3\}, \{\omega_4, \omega_5, \omega_6\}, \phi, \Omega\}\\
+    \mathcal{F}_2 = \sigma(X_0, X_1, X_2) &= \{\omega_1, \omega_4, \{\omega_2, \omega_3, \omega_4, \omega_5, \omega_6\}, \{\omega_1, \omega_2, \omega_3, \omega_5, \omega_6\}\{\omega_1, \omega_2, \omega_3\}, \{\omega_4, \omega_5, \omega_6\},\\
+    &\ \ \ \ \{\omega_2, \omega_3, \omega_5, \omega_6\}, \{\omega_1, \omega_4\}, \{\omega_1, \omega_4, \omega_5, \omega_6\}, \{\omega_2, \omega_3\}, \{\omega_5, \omega_6\}, \{\omega_1, \omega_2, \omega_3, \omega_4\},\\
+    &\ \ \ \ \{\omega_1, \omega_5, \omega_6\}, \{\omega_2, \omega_3, \omega_4\}\phi, \Omega\}\\
+    \mathcal{F}_3 = \sigma(X_0, X_1, X_2, X_3) &= \{\omega_1, \omega_2,\cdots, \phi, \Omega\}
+\end{align*}
+
+\section{Stopping time}
+\begin{align*}
+    \tau_1(\omega_i)=\begin{cases}
+        1, & i = 1, 2, 3\\
+        2, & i = 4\\
+        3, & i = 5, 6
+    \end{cases}\quad\ 
+    \tau_2(\omega_i)=\begin{cases}
+        1, & i = 1\\
+        2, & i = 2, 3\\
+        3, & i = 4, 5, 6
+    \end{cases}
+\end{align*}
+\end{document}
