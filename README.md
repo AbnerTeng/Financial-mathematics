@@ -1,2 +1,3 @@
 # Financial-mathematics
-in-class homework
+
+2022 Fall Financial Mathematics
