@@ -73,14 +73,20 @@ $A = \{\omega_1, \omega_4\}\quad\ B = \{\omega_1, \omega_2, \omega_3\}\quad\ C =
 \subsection*{Conidtional Probability}
 \begin{enumerate}
     \item $P(A|\mathcal{F}_0)=P(A|\{\phi,\Omega\}) = P(\{\omega_1, \omega_4\}|\{\phi,\Omega\}) = \dfrac{1}{3}$ 
-    \item $P(C|\mathcal{F}_1) = P(C|\{\{\omega_1, \omega_2, \omega_3\},\cdots, \Omega\}) = P(\{\omega_3, \omega_4, \omega_5\}|\{\{\omega_1, \omega_2, \omega_3\},\cdots, \Omega\}) = \dfrac{5}{12}$
-    \item $P(A|\mathcal{F}_2) = P(A|\{\{\omega_1\},\cdots, \Omega\}) = P(\{\omega_1, \omega_4\}|\{\{\omega_1\},\cdots, \Omega\}) = 1$ 
+    \item $P(C|\mathcal{F}_1) = P(C|\{\{\omega_1, \omega_2, \omega_3\},\cdots, \Omega\}) = P(\{\omega_3, \omega_4, \omega_5\}|\{\{\omega_1, \omega_2, \omega_3\},\cdots, \Omega\}) = \begin{cases} \frac{1}{2}, & i = 1,2,3\\ \frac{2}{3}, & i = 4,5,6
+    \end{cases}$
+    \item $P(A|\mathcal{F}_2) = P(A|\{\{\omega_1\},\cdots, \Omega\}) = P(\{\omega_1, \omega_4\}|\{\{\omega_1\},\cdots, \Omega\}) = \begin{cases}
+        1, & i = 1,4\\
+        0, & i = 2,3,5,6
+    \end{cases}$ 
 \end{enumerate}
 \subsection*{\begin{proof}
     $A\in \mathcal{F}_2\Rightarrow P(A|\mathcal{F}_2) = \mathbbm{1}_A$
 \end{proof}}
 \begin{align*}
-    P(A|\mathcal{F}_2)(\omega_1) = P(A|\mathcal{F}_2)(\omega_4) = 1 \Rightarrow P(A|\mathcal{F}_2)=1=\mathbbm{1}_A\\
+    & P(A|\mathcal{F}_2)(\omega) = \dfrac{P(A\cap G_{\omega})}{P(G_{\omega})}=1\\
+    & \forall k \notin A\ then\ A\cap G_k = 0\Rightarrow P(A\cap G_k) = 0 \Rightarrow P(A|\mathcal{F}_2)(k) = 0\\
+    & Hence,\ P(A|\mathcal{F}) = \mathbbm{1}_A
 \end{align*}
 \section{Find conditional expectation}
 \subsection*{\begin{proof}
@@ -96,20 +102,31 @@ According to Law of Iterated Expectation (L.I.E), $E(X_4) = E[E(X_4|\mathcal{F}_
 is measurable in $\mathcal{F}_1$, so $E(X_4|\mathcal{F}_1) = X_4 = 2$. So $E(X_4) = E[E(X_4|\mathcal{F}_1)] = E(2) = 2$
 \subsection*{Conditional expectation}
 \begin{enumerate}
-    \item $E(X_5|\mathcal{F}_2)$\\
-    \item $E(X_0|\mathcal{F}_2)$\\
-    \item $E(X_4|\mathcal{F}_0)$\\
-    \item $E(X_4|\mathcal{F}_2)$\\
-    \item $E(X_4|\mathcal{F}_3)$\\
+    \item $E(X_5|\mathcal{F}_2) = \begin{cases}
+        1, & i = 1\\
+        \frac{13}{5}, & i = 2,3\\
+        4, & i = 4\\
+        \frac{16}{5}, & i = 5,6
+    \end{cases}$
+    \item $E(X_0|\mathcal{F}_2) = 1, i = 1,2,3,4,5,6$
+    \item $E(X_4|\mathcal{F}_0) = 2$
+    \item $E(X_4|\mathcal{F}_2) = \begin{cases}
+        1, & i = 1\\
+        1, & i = 2,3\\
+        3, & i = 4\\
+        3, & i = 5,6
+    \end{cases}$
+    \item $E(X_4|\mathcal{F}_3) = \begin{cases}
+        1, & = 1,2,3\\
+        3, & = 4,5,6
+    \end{cases}$
     \item $E(X_4|X_2=4) = E(X_4|X_2(\omega_i), i = 2,3,5,6) = \dfrac{1\times5 + 3\times 3}{8} = \dfrac{7}{4}$
 \end{enumerate}
 \subsection*{Varify $E(X_2X_4|\mathcal{F}_1) = X_4E(X_2|\mathcal{F}_1)$}
+$X$ is $\mathcal{G}$ measurable $\Rightarrow X(\omega) = \sum C_i \mathbbm{1}_{G_{i}}$\\
+Suppose $X_4$ is $\mathcal{F}$ measurable, then $X_4 = \sum C_i \mathbbm{1}_{G_{i}}$\\
 \begin{align*}
-    E(X_2X_4|\mathcal{F}_1) &= E(X_2|\mathcal{F}_1)E(X_4|\mathcal{F}_1)
-\end{align*}
-We know that $X_4$ is measurable in $\mathcal{F}_1$, so $E(X_4|\mathcal{F}_1) = X_4$
-\begin{align*}
-    E(X_2|\mathcal{F}_1)E(X_4|\mathcal{F}_1) = X_4E(X_2|\mathcal{F}_1)
+    \int_G X_4 E(X_2|\mathcal{F}_1)dP = \int_{G\cap B} E(X_2|\mathcal{F}_1)dP = \int_{G \cap B} X_2 dP = \int_G X_4X_2 dP = \int_G E(X_4X_2|\mathcal{F}_1)dP
 \end{align*}
 \subsection*{\begin{proof}
     $E(X|\mathcal{F}_0) = E(X)$
